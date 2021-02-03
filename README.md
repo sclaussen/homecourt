@@ -10,6 +10,7 @@ teams have x4 probably today:
 
 - Utah Jazz, LA Clippers, Indiana Pacers, Memphis Grizzlies
 
+```
 76ers: 5
 trailblazers: 3
 bucks: 4
@@ -40,6 +41,7 @@ thunder: 3
 timerwolves: 3
 warriors: 3
 wizards: 5
+```
 
 
 
