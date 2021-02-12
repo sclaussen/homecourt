@@ -1,6 +1,40 @@
 'use strict'
 
 
+let bonusTeamsArray = [
+    { name: '76ers', count: 0 },
+    { name: 'trailblazers', count: 0 },
+    { name: 'bucks', count: 0 },
+    { name: 'bulls', count: 0 },
+    { name: 'cavs', count: 0 },
+    { name: 'celtics', count: 0 },
+    { name: 'clippers', count: 0 },
+    { name: 'grizzlies', count: 0 },
+    { name: 'hawks', count: 0 },
+    { name: 'heat', count: 0 },
+    { name: 'hornets', count: 0 },
+    { name: 'jazz', count: 0 },
+    { name: 'kings', count: 0 },
+    { name: 'knicks', count: 0 },
+    { name: 'lakers', count: 0 },
+    { name: 'magic', count: 0 },
+    { name: 'mavs', count: 0 },
+    { name: 'nets', count: 0 },
+    { name: 'nuggets', count: 0 },
+    { name: 'pacers', count: 0 },
+    { name: 'pelicans', count: 0 },
+    { name: 'pistons', count: 0 },
+    { name: 'raptors', count: 0 },
+    { name: 'rockets', count: 0 },
+    { name: 'spurs', count: 0 },
+    { name: 'suns', count: 0 },
+    { name: 'thunder', count: 0 },
+    { name: 'timerwolves', count: 0 },
+    { name: 'warriors', count: 0 },
+    { name: 'wizards', count: 0 },
+];
+
+
 let teams = {
     '76ers': 5,
     bucks: 4,
@@ -202,28 +236,28 @@ function simulate(output) {
     while (pinsOwned.length < pins.length) {
 
         day++;
+        if (day > 7) {
+            console.log(pinsOwned);
+            process.exit(1);
+        }
         if (output) {
             console.log('\nDay ' + day);
         }
-        let pinsWithBonus = [...pins];
-        let bonusTeams = getFourBonusTeams();
+
+
+        let bonusTeams = getBonusTeams();
         if (output) {
             console.log('  Bonus: ' + bonusTeams.join(' '));
         }
 
+
+        let pinsWithBonus = [...pins];
         for (let bonusTeam of bonusTeams) {
             for (let pin of pins) {
                 if (pin.startsWith(bonusTeam)) {
                     pinsWithBonus.unshift(pin);
                 }
             }
-        }
-
-        if (!goodOdds(bonusTeams, pinsOwned, teamsOwned)) {
-            if (output) {
-                console.log('  Skipping');
-            }
-            continue;
         }
 
         let dailyPoints = 0;
@@ -249,7 +283,11 @@ function simulate(output) {
         }
 
         if (output) {
-            console.log('  points ' + dailyPoints + ' (' + points + ')');
+            if (dailyPoints === 0) {
+                console.log('  Skipping...');
+            } else {
+                console.log('  points ' + dailyPoints + ' (' + points + ')');
+            }
         }
     }
 
@@ -268,16 +306,27 @@ function goodOdds(bonusTeams, pinsOwned, teamsOwned) {
 }
 
 
-function getFourBonusTeams() {
+function getBonusTeams() {
     let bonusTeams = [];
-    let teamNames = Object.keys(teams);
-    while (bonusTeams.length !== 4) {
-        let n = getRandom(30);
-        if (!bonusTeams.includes(teamNames[n])) {
-            bonusTeams.push(teamNames[n]);
-        }
+    let possibleTeams = bonusTeamsArray.filter(obj => obj.count === 0).map(obj => obj.name);
+    if (possibleTeams.length === 2) {
+        getRandomTeams(bonusTeams, possibleTeams, 2);
     }
+
+    bonusTeamsArray.map(function(obj) { if (obj.count > 0) { obj.count -= 1 } });
+    possibleTeams = bonusTeamsArray.filter(obj => obj.count === 0).map(obj => obj.name);
+    getRandomTeams(bonusTeams, possibleTeams, 4 - bonusTeams.length);
     return bonusTeams;
+}
+
+
+function getRandomTeams(bonusTeams, possibleTeams, count) {
+    for (let i = 0; i < count; i++) {
+        let teamNumber = getRandom(possibleTeams.length);
+        bonusTeams.push(possibleTeams[teamNumber]);
+        bonusTeamsArray.map(function(obj) { if (obj.name === possibleTeams[teamNumber]) obj.count = 7; });
+        possibleTeams.splice(teamNumber, 1);
+    }
 }
 
 

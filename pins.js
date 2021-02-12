@@ -2,8 +2,7 @@
 
 
 let missingTeams = {
-    atlanta: 1,
-    denver: 3,
+    denver: 1,
 };
 
 

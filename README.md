@@ -1,3 +1,5 @@
+##
+
 ## Problem
 
 This was a programming problem my son was working on in Python related
@@ -11,35 +13,35 @@ teams have x4 probably today:
 - Utah Jazz, LA Clippers, Indiana Pacers, Memphis Grizzlies
 
 ```
-76ers: 5
-trailblazers: 3
-bucks: 4
-bulls: 4
-cavs: 4
-celtics: 3
-clippers: 3
-grizzlies: 3
-hawks: 4
-heat: 3
-hornets: 4
+76ers: 5                        S
+trailblazers: 3                 T
+bucks: 4                        F
+bulls: 4                        M
+cavs: 4                         F
+celtics: 3                      U
+clippers: 3                     W
+grizzlies: 3                    M
+hawks: 4                                R
+heat: 3                         U
+hornets: 4                      U
 jazz: 4
-kings: 5
-nicks: 2
-lakers: 2
-magic: 2
-mavs: 2
-nets: 4
-nuggets: 4
-pacers: 4
-pelicans: 4
-pistons: 3
-raptors: 2
-rockets: 3
-spurs: 3
-suns: 4
-thunder: 3
-timerwolves: 3
-warriors: 3
+kings: 5                        S
+knicks: 2                       T
+lakers: 2                       M
+magic: 2                        S
+mavs: 2                                 R
+nets: 4                         T
+nuggets: 4                              R
+pacers: 4                       W
+pelicans: 4                     T
+pistons: 3                      F
+raptors: 2                      F
+rockets: 3                      S
+spurs: 3                        M
+suns: 4                         U
+thunder: 3                      W
+timerwolves: 3                  W
+warriors: 3                             R
 wizards: 5
 ```
 
